@@ -1,5 +1,7 @@
 package se.sprinto.hakan.application;
 
+import java.util.random.RandomGenerator;
+
 public class Application {
     private CodeGeneratorInterface codeGenerator;
 
@@ -8,10 +10,27 @@ public class Application {
     }
 
     public void startApplication() {
-        //entry point för applikationen
-        IO.println(codeGenerator.getCode());
+        //anonym klass - skapas direkt i programflödet, ingen separat fil
+        CodeGeneratorInterface codeGeneratorInterface = new CodeGeneratorInterface() {
+            @Override
+            public int getCode() {
+                return RandomGenerator.getDefault().nextInt(100, 1000);
+            }
+        };
+        int code = codeGeneratorInterface.getCode();
+        IO.println("Koden från den anonyma klassen är: " + code);
+
+        CodeGeneratorInterface codeGen = () -> RandomGenerator.getDefault().nextInt(1, 11);
+
+        int code2 = codeGen.getCode();
+
+        IO.println("Koden från lambda-implementationen är:" + code2);
 
 
+    }
+
+    public int getCodeFromGenerator(CodeGeneratorInterface codeGenerator) {
+        return codeGenerator.getCode();
     }
 
 
