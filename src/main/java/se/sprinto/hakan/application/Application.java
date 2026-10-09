@@ -19,7 +19,8 @@ public class Application {
         };
         int code = codeGeneratorInterface.getCode();
         IO.println("Koden från den anonyma klassen är: " + code);
-
+        //implementation med lambda - skapas också direkt i programflödet
+        //funkar endast när interfacet har en enda abstrakt metod
         CodeGeneratorInterface codeGen = () -> RandomGenerator.getDefault().nextInt(1, 11);
 
         int code2 = codeGen.getCode();
