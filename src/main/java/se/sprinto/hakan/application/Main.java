@@ -3,10 +3,12 @@ package se.sprinto.hakan.application;
 public class Main {
 
     static void main() {
-        Application application = new Application();
-        application.startApplication();
 
+        CodeGenerator codeGenerator = new CodeGenerator();
+        //FakeCodeGenerator fakeCodeGenerator = new FakeCodeGenerator();
+        Application application = new Application(codeGenerator);
         //kod
+        application.startApplication();
 
 
     }
